@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+/*welcome.jsp ui*/
+#sub_img{
+	width:971px; height:179px;
+	background-image:url(../Images/company/sub_back.png);
+	background-repeat:no-repeat;
+	background-position:left top;
+}
+
+#sub_menu{
+	width:238px; float:left; margin:20px; border: 0px solid #ccc;
+	font-family: Verdana, Geneva, sans-serif;/*글꼴지정*/
+	font-size:1em;/*상대적  크기 단위로 글자 크기 지정*/
+}
+
+#sub_menu ul{
+	list-style:none;/*앞의 마커 없앰.*/
+	margin:20px 0px 0px 10px;
+}
+
+#sub_menu a{
+	text-decoration:none;
+	color:#666;
+	display: block; width: 150px; height:15px; padding: 7px;
+	border-bottom-width:1px;/*밑줄 점선 두께*/
+	border-bottom-style:dotted;/*밑줄 점선 스타일*/
+	border-bottom-color:#999;/*밑줄 점선 색*/
+	background-image:url(../Images/bullet.gif);
+	background-repeat:no-repeat;
+	background-position:right center;
+}
+
+#sub_menu a:hover{
+	background-image:url(../Images/bullet_orange.gif);
+	background-repeat:no-repeat;
+	background-position:right center;
+	color:#f90;/*#ff9900*/
+}
+
+/*서브 메인 ui*/
+#sub_main_cont{
+	border:0px solid #ccc; float:right;/*오른쪽 배치*/ width:675px;/*margin이 15px들어가기 때문에 15px를 빼줘야함.*/
+	height:690px; margin-right:15px;/*오른쪽 바깥 여백*/
+}
+
+#sub_main_cont h1{
+	font-family:"Times New Roman", Times, serif;
+	font-size:45px; color:#ccc; margin:20px 0px;/*상하 바깥여백 20픽셀, 좌우 바깥여백을 0픽셀로 저장*/
+
+}
+
+#sub_main_cont p{
+	padding-left:10px;/*안쪽 왼여백 지정*/
+}
+
+figure.ceo{
+	float:right; margin:5px;
+}
+
+figcaption{
+	text-align:center;/*문자 수평 중앙 정렬*/
+	color:#39F;/*16진수 색상코드 3399FF를 줄여서 표현*/
+}
+
+/*history.jsp ui*/
+#sub_main_cont .y2011, #sub_main_cont .y2010, #sub_main_cont .y2009{
+	border-top-width:1px;/*윗줄 선 두께*/
+	border-top-style:solid;/*윗줄 선 스타일 실선*/
+	border-top-color:#999;/*윗줄 선 색상*/
+	padding:10px 0px 0px 150px;
+}
+
+#sub_main_cont .y2011 h3, #sub_main_cont .y2010 h3, #sub_main_cont .y2009 h3{
+	display:none;/*연도값이 사라지고 자리도 차지하지 않는다.*/
+}
+
+#sub_main_cont .y2011{
+	background-image:url(../Images/company/2011.jpg);
+	background-repeat:no-repeat;
+	background-position: left top;
+}
+
+#sub_main_cont .y2010{
+	background-image:url(../Images/company/2010.jpg);
+	background-repeat:no-repeat;
+	background-position: left top;
+}
+
+#sub_main_cont .y2009{
+	background-image:url(../Images/company/2009.jpg);
+	background-repeat:no-repeat;
+	background-position: left top;
+}
+
+#sub_main_cont .y2011 dt, #sub_main_cont .y2010 dt, #sub_main_cont .y2009 dt{
+	float:left; text-transform:capitalize;/*월 첫 글자 시작을 영 대문자로 한다.*/
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:15px; color:#39f;
+	padding-top:3px;/*안쪽 위 여백*/
+	margin:0px;
+}
+
+#sub_main_cont .y2011 dd, #sub_main_cont .y2010 dd, #sub_main_cont .y2009 dd{
+	padding:0px 0px 0px 15px;
+	line-height:2em;/*수직간의 간격을 벌림.(상대적 크기)*/
+	background-image:url(../Images/company/h_bullet.gif);
+	background-repeat:no-repeat;
+	background-position:left center;
+}
+
+#sub_main_cont .y2011 dl, #sub_main_cont .y2010 dl, #sub_main_cont .y2009 dl{
+	margin:0px 0px 10px 0px; padding:0px 0px 10px 0px;
+	border-bottom-width:1px;/*밑줄 선 두께*/
+	border-bottom-style:dotted;/*밑줄 선 점선*/
+	border-bottom-color:#ccc;/*밑줄 선 색*/
+}
+
+#sub_main_cont dl.dot_none{
+	border-bottom:none;/*밑줄 선 없앰*/
+}

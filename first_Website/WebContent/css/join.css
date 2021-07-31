@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/*join.jsp ui*/
+/*서브 멤버쉽(회원가입) 메인 이미지*/
+
+#sub_img_member{
+	width:971px; height:179px;
+	background-image:url(../Images/member/sub_back.png);
+	background-repeat:no-repeat;
+	background-position:left top;
+}
+
+form#join{
+	width:670px; margin:20px 0px 0px 0px;
+}
+
+#join fieldset{
+	border:none;/*필드셋 그룹 경계선을 제거*/
+	padding:10px 0px 20px 5px;
+}
+
+#join fieldset legend{
+	font-size:20px;
+	border-bottom:1px dotted #666;/*밑줄 점선*/
+	width:600px;
+	padding:5px;
+}
+
+#join label{
+	width:140px; float:left;
+	margin:5px 0px;/*상하 바깥여백 5픽셀, 좌우 바깥여백 0픽셀*/
+}
+
+#join input{
+	margin:5px 0px;/*label과 마찬가지로 여백을 준다. 안주면 틀깨짐*/
+	border:1px solid #999;/*input 입력박스 테두리 모양을 만듬*/
+	background-color:#fcfdea;/*input 입력박스 배경색을 설정*/
+}
+
+#join input.id{
+	width:100px; height:18px;
+}
+
+#join input.dup{
+	border-radius:8px; border:none;/*테두리 없앰*/
+	width:120px; height:23px;
+	margin:0px 0px 0px 5px;
+	font-weight:bold;/*글자 진하게*/
+	color:#fff;
+	background-image:url(../Images/member/dup.jpg);
+	background-repeat:repeat-x;
+	background-position:center center;
+}
+
+#join input.pass{
+	width:150px; height:18px;
+}
+
+#join input.nick{
+	width:80px; height:18px;
+}
+
+#join input.email{
+	width:200px; height:18px;
+}
+
+#join input.address{
+	width:300px; height:18px;
+}
+
+#join input.phone{
+	width:150px; height:18px;
+}
+
+#buttons{
+	margin:20px 0px 0px 0px;
+}
+
+#buttons .submit, #buttons .cancel{
+	height: 30px; width:150px;
+	border:1px solid #666;
+	border-radius:10px; box-shadow:3px 3px 3px #ccc;/*css3에서 추가된 속성으로 그림자 효과*/
+	font-size:14px;
+}
+
+#buttons .submit{
+	background-image:url(../Images/member/submit_back.jpg);
+	background-repeat:repeat-x;
+	background-position:center center;
+	color:#fff;
+}
+
+#buttons .cancel{
+	margin:0px 0px 0px 20px;
+	background-image:url(../Images/member/cancel_back.jpg);
+	background-repeat:repeat-x;
+	background-position:center center;
+}

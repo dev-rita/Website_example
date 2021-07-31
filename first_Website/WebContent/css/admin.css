@@ -1,0 +1,74 @@
+@charset "UTF-8";
+/*admin_index.jsp ui*/
+#aMain_wrap{
+	width:860px; height:780px; border:1px solid red;
+	border-radius:15px; box-shadow:12px 12px 12px gray;
+	margin-left:auto; margin-right:auto; /*블록수준 요소태그 div폭을 지정하고 이 속성을 사용하면 좌우 수평 중앙정렬이 된다.*/
+	margin-top:30px;
+}
+
+#aMain_header{
+	width:840px; height:180px;
+	border: 1px solid orange; border-radius:15px;
+	margin:10px 0px 0px 10px;
+}
+
+#aMain_logo{
+	width:150px; height:160px; border:1px solid red; border-radius:15px;
+	margin:10px 0px 0px 10px; float:left;/*블록성질 잃음.div 수직정렬을 수평정렬로 변경*/
+}
+
+#aMain_logo img{
+	width:120px; height:55px;	margin:51px 0px 0px 12px; 
+}
+
+#aMain_menu {
+	width:380px; height:160px; border:1px solid red;border-radius:15px;
+	float:left; margin: 10px 0px 0px 10px;
+}
+
+#aMain_menu ul li{
+	float:left;/*수직 목록을 수평목록으로 변경*/
+	list-style:none;/*목록 앞 마커를 없앰.*/
+	margin-top:112px;
+	padding:0px 11px;
+}
+
+a:link, a:visited, a:active{
+	text-decoration:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+#aMain_right{
+	width:264px; height:160px; border:1px solid red; border-radius:15px; margin:10px 0px 0px 10px;
+	float:left;
+}
+
+#aMain_right .aRight_title{
+	font-size:12px; margin-left:10px;
+}
+
+.clear{
+	clear:both; /*flow를 제거해 ui가 깨지는 현상 방지*/
+}
+
+#aMain_cont{
+	width:840px; height:500px; border:1px solid orange; border-radius:15px; margin:10px 0px 0px 10px;
+}
+
+#aMain_cont .aMainCont_title{
+	font-size:16px;
+	margin:230px 0px 0px 320px;
+}
+
+#aMain_footer{
+	width:840px; height:56px; border:1px solid orange; border-radius:15px; margin:10px 0px 0px 10px;
+}
+
+#aMain_footer .aFooter_title{
+	font-size:14px;
+	margin:20px 0px 0px 200px;
+}
