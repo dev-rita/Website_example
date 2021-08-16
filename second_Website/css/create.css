@@ -1,0 +1,90 @@
+@charset "UTF-8";
+#member{
+	width:620px;
+	border:1px solid gray;
+	margin-left:10px;
+	padding-left:10px;
+	height: 50px;
+	border-bottom: none;
+	background-color: white;
+}
+#member img{
+	float:left;
+	height:auto;
+	padding-top:5px;
+}
+
+#member a{
+	text-decoration:none;
+	color:#76a4d6;
+	display:inline;
+	
+}
+
+#member h6{
+	float:left;
+	padding:3px;
+	margin:0px;
+	display:inline;
+}
+
+
+#typing{
+	width:600px;
+	background-color: white;
+	border:1px solid gray;
+	margin-left:10px;
+	padding:30px 0px 0px 30px;
+}
+
+#board_type {
+	width:536px;
+}
+
+#title{
+	margin-top:20px;
+	padding:0px;
+	height: 40px;
+}
+
+#tag{
+	height: 40px;
+}
+
+#textarea{
+	overflow-y:scroll;
+	resize:vertical;
+	/* none; 사용자 임의 변경 불가  both; 사용자 변경이 모두 가능 
+       horizontal; 좌우만 가능  vertical; 상하만 가능 */
+}
+
+
+#recapcha{
+	text-align: center;
+}
+
+#recapcha div{
+	border:1px solid #c9c9c9;
+	width:300px;
+	height:150px;
+	display:inline;
+	padding:10px;
+}
+
+.btn_reset{
+	margin-right:20px;
+	padding:5px 15px 5px 15px;
+	border:1px solid #c9c9c9;
+	background-color: white;
+	border-radius: 5px;
+}
+
+.btn_submit{
+	margin-right:20px;
+	padding:5px 15px 5px 15px;
+	float:right;
+	color:white;
+	border:none;
+	background-color: #00ce00;
+	border-radius: 5px;
+}
