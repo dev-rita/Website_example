@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Board"><!-- 매퍼 네임 스페이스 명을 Board로 설정 -->
+ 
+ <!-- 게시판 저장 -->
+ <insert id="b_in" parameterType="b"><!-- parameterType은 전달인자 타입 속성이고 생략 가능하다. 
+ 	속성값 b는 mybatis-config.xml에서 설정한 BoardVO.java의 객체 별칭명이다. -->
+ 	insert into tbl_board (bno, writer, title, content, regdate) values (bno_seq.nextval, #{writer}, #{title}, #{content}, sysdate)
+ 	<!-- #{title}을 자바로 표현하면 b.getTitle()과 같다. -->
+ </insert>
+ 
+ <!-- 총 레코드 개수 -->
+ <select id="b_count" resultType="int"><!-- resultType은 반환 타입 속성 -->
+ 	select count(*) from tbl_board <!-- count()함수는 레코드 개수를 구한다. -->
+ </select>
+ 
+ <!--페이징이 되는 게시판 목록 -->
+ <select id="b_list" resultType="com.naver.vo.BoardVO">
+ <!-- resultType속성값에 풀패키지 경로 또는 mybatis-config.xml에서 설정한 객체 별칭 이름 b로 해도 된다. -->
+ 	select * from
+ 	(select rowNum rNum,bno,writer,title,viewcnt,regdate,replycnt from (select * from tbl_board order by bno desc))
+ 	<!-- rowNum은 오라클에서 테이블 생성시 만들어지는 컬럼으로 레코드 저장시 일련번호 값을 저장시킴. rNum은 rowNum컬럼의 별칭 이름 -->
+ 	where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+ 	<!-- &gt;=은 >=, &lt;=은 <=를 의미 -->
+ </select>
+ 
+ <!-- 조회수 증가  -->
+ <update id="b_hit" parameterType="int">
+ update tbl_board set viewcnt=viewcnt+1 where bno=#{bno}
+ </update>
+ 
+ <!-- 내용 보기 -->
+ <select id="b_cont" resultType="b">
+ select * from tbl_board where bno=#{bno}
+ </select>
+ 
+ <!-- 수정 -->
+ <update id="b_edit">
+ update tbl_board set writer=#{writer}, title=#{title}, content=#{content} where bno=#{bno}
+ </update>
+ 
+ <!-- 게시물 삭제 -->
+ <delete id="b_del" parameterType="int"><!-- parameterType은 전달인자 타입 속성, 생략 가능 -->
+ delete tbl_board where bno=#{bno}
+ </delete>
+ 
+ <!-- 댓글이 추가되면 댓글 수 +1, 댓글이 삭제되면 댓글 수 -1 -->
+ <update id="updateReplyCnt" parameterType="java.util.HashMap">
+ update tbl_board set replycnt=replycnt+#{count} where bno=#{bno}
+ </update>
+ </mapper>

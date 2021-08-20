@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="NightBoard">
+ 
+ <!-- 게시판 저장 -->
+ <insert id="nb_in" parameterType="nb">
+ 	insert into tbl_boardNight (num, writer, title, regdate) values (num_seq.nextval, #{writer}, #{title}, sysdate)
+ </insert>
+ 
+ <!-- 총 레코드 개수 -->
+ <select id="nb_count" resultType="int"><!-- resultType은 반환 타입 속성 -->
+ 	select count(*) from tbl_boardNight <!-- count()함수는 레코드 개수를 구한다. -->
+ </select>
+ </mapper>
