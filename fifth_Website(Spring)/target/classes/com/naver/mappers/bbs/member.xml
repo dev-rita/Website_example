@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Member">
+ 
+    <!-- 아이디 중복 검색 -->
+    <select id="m_check" resultType="m">
+     select * from bbsmember where mem_id=#{id}
+    </select>
+    
+    <!-- 우편주소 검색 -->
+    <select id="m_zip" parameterType="java.lang.String" resultType="z"><!-- parameterType은 전달인자 타입이고, resultType은 반환 타입이다. -->
+      select * from zipcode where dong like #{dong}
+    </select>
+    
+    <!-- 회원저장 -->
+    <insert id="m_in">
+      insert into bbsmember (mem_id, mem_pwd, mem_name, mem_zip, mem_zip2, mem_addr, mem_addr2, mem_phone01, mem_phone02, mem_phone03,
+      mail_id,mail_domain,mem_state, mem_date) values(#{mem_id},#{mem_pwd},#{mem_name},#{mem_zip},#{mem_zip2},#{mem_addr},
+      #{mem_addr2}, #{mem_phone01},#{mem_phone02},#{mem_phone03},#{mail_id},#{mail_domain},1,sysdate)
+    </insert>
+    
+    <!-- 비번찾기 회원정보 검색 -->
+    <select id="p_find" resultType="m">
+      select * from bbsmember where mem_id=#{mem_id} and mem_name=#{mem_name}
+    </select>
+    
+    <!-- 임시 비번 수정 -->
+    <update id="p_edit">
+     update bbsmember set mem_pwd=#{mem_pwd} where mem_id=#{mem_id}
+    </update>
+ 
+    <!-- 가입회원만 로그인 인증 처리 -->
+    <select id="login_ck" resultType="m">
+      select * from bbsmember where mem_id=#{login_id} and mem_state=1
+    </select>
+          
+    <!-- 회원정보 가져오기 -->
+    <select id="m_edit" resultType="m">
+      select * from bbsmember where mem_id=#{id}
+    </select>    
+    
+    <!-- 정보수정 완료 -->
+    <update id="edit_ok">
+      update bbsmember set mem_pwd=#{mem_pwd}, mem_name=#{mem_name}, mem_zip=#{mem_zip}, mem_zip2=#{mem_zip2}, mem_addr=#{mem_addr},
+      mem_addr2=#{mem_addr2}, mem_phone01=#{mem_phone01}, mem_phone02=#{mem_phone02}, mem_phone03=#{mem_phone03},
+      mail_id=#{mail_id}, mail_domain=#{mail_domain} where mem_id=#{mem_id}
+    </update> 
+    
+    <!-- 회원탈퇴 -->
+    <update id="m_del">
+     update bbsmember set mem_delcont=#{mem_delcont}, mem_state=2, mem_deldate=sysdate where mem_id=#{mem_id}
+    </update>
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

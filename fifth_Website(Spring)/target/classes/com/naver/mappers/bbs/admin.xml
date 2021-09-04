@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Admin">
+ 
+     <!-- 관리자 정보 저장 -->
+     <insert id="admin_in" parameterType="com.naver.vo.AdminVO">
+      insert into admin values(1,#{admin_id},#{admin_pwd},#{admin_name},sysdate)
+     </insert>
+     
+     <!-- 관리자 로그인 인증 -->
+     <select id="admin_login" parameterType="String" resultType="admin">
+     <!-- parameterType속성은 전달인자 타입이고 생략가능, resultType속성은 반환타입 -->
+       select * from admin where admin_id=#{admin_id}
+     </select>
+     
+ </mapper>

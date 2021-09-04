@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+      http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- AOP 자동 프록시 설정 -->
+	<aop:aspectj-autoproxy />
+	
+	<!--  스프링 JDBC -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	 <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+	 <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+	 <property name="username" value="night" />
+	 <property name="password" value="night" />
+	</bean>	
+	
+	<!-- spring과 mybatis연결 설정과 mybatis환경설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  <property name="dataSource" ref="dataSource" /><!-- setter()메서드를 통한 DI(의존성) 주입 -->
+	  <property name="configLocation" value="classpath:/mybatis-config.xml" /><!-- 데이터 저장빈 클래스의 객체명 별칭을 관리 -->
+	  <property name="mapperLocations" value="classpath:com/naver/mappers/*/*.xml" /><!-- 쿼리문을 수행하는 매퍼 xml파일 위치설정 -->
+	</bean>
+	
+	<!-- 트랜잭션 매니져 설정 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 <property name="dataSource" ref="dataSource" /><!-- DI 즉 의존성을 주입하고 빈아이디 객체 dataSource를 호출 -->	 
+	</bean>
+	<tx:annotation-driven /><!-- 트랜잭션 설정 애너테이션, 애너테이션을 통한 트랜잭션 관리가 가능. -->
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+	 <!-- destroy-method="clearCache"는 임시 메모리를 비워서 디비 연결을 해제 -->
+	  <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" /><!-- 생성자를 통한 의존성 주입 -->
+	</bean>
+	
+	<!-- DAOImpl의 @Repository이 설정된 부분을 스프링에서 오토스캔(자동으로 찾아서) 하여 등록하게 함. -->
+	<context:component-scan base-package="com.naver.dao" />
+	
+	<!-- 서비스 추가 이유: 첫째,컨트롤과 모델 dao를 연결하는 중간 매개체 역할을 한다. 둘째, 고객의 추가요구 사항을 반영해서 개발 로직 코드를 유연하게 작성 가능하게 한다.
+	셋째, 가장 중요한 것은 스프링의 AOP를 통한 트랜잭션 적용이 핵심이다. 그렇게 함으로써 데이터의 일치성과 사이트의 신뢰도를 높여준다. -->
+	<context:component-scan base-package="com.naver.service" />
+	
+	<aop:config></aop:config>
+	<!-- AOP기능을 설정. 이 설정은 향후에  XML방식으로 AOP 기능을  설정할 때 사용. -->
+</beans>
