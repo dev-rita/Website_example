@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminBbs">
+
+	<!-- 관리자 자료실 검색전후 레코드 개수 -->
+	<select id="abbs_row" resultType="int">
+		select count(bbs_no) from bbs
+		<where>
+			<if test="find_field == ''">
+				<!-- 검색조건이 없어서 총레코드 개수 -->
+			</if>
+			<if test="find_field == 'bbs_title'">
+				<!-- 검색 조건이 제목인 경우 -->
+				bbs_title like #{find_name} <!-- like는 오라클 검색 연산자 -->
+			</if>
+			<if test="find_field == 'bbs_cont'">
+				bbs_cont like #{find_name}
+			</if>
+		</where>
+	</select>
+
+	<!-- 검색전후 관리자 자료실 목록 -->
+	<select id="abbs_list" resultType="bbs">
+		select * from
+		(select rowNum rNum,bbs_no,bbs_name,bbs_title,
+		bbs_hit,bbs_ref,bbs_step,bbs_level,bbs_date
+		from (select * from bbs
+		<where>
+			<if test="find_field == ''">
+				<!-- 검색조건이 없어서 총레코드 개수 -->
+			</if>
+			<if test="find_field == 'bbs_title'">
+				<!-- 검색 조건이 제목인 경우 -->
+				bbs_title like #{find_name} <!-- like는 오라클 검색 연산자 -->
+			</if>
+			<if test="find_field == 'bbs_cont'">
+				bbs_cont like #{find_name}
+			</if>
+		</where>
+		order by bbs_ref desc,
+		bbs_level asc))
+		where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+	</select>
+
+
+	<!-- 관리자 자료실 저장 -->
+	<insert id="abbs_in">
+		insert into bbs (bbs_no,bbs_name,bbs_title,bbs_pwd,
+		bbs_cont,bbs_file,bbs_ref,bbs_step,bbs_level,bbs_date)
+		values(bbs_no_seq.nextval,#{bbs_name},#{bbs_title},
+		#{bbs_pwd},#{bbs_cont},#{bbs_file},bbs_no_seq.nextval,
+		0,0,sysdate)
+	</insert>
+
+    <!-- 관리자 자료실 내용보기 -->
+    <select id="abbs_cont" parameterType="int" resultType="com.naver.vo.BbsVO">
+      select * from bbs where bbs_no=#{no}
+    </select>
+    
+    <!-- 관리자 자료실 수정 -->
+    <update id="abbs_edit">
+      update bbs set bbs_name=#{bbs_name}, bbs_title=#{bbs_title}, bbs_cont=#{bbs_cont} ,bbs_file=#{bbs_file}
+      where bbs_no=#{bbs_no}
+    </update>
+    
+    <!-- 관리자 자료실 삭제 -->
+    <delete id="abbs_del">
+      delete from bbs where bbs_no=#{no}
+    </delete>
+    
+</mapper>
+
+
+
+
+
+
+
+
