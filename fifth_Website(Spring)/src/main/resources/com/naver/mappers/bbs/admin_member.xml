@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminMember">
+
+	<!-- 검색전 후 회원수 -->
+	<select id="am_count" resultType="int">
+		select count(mem_id) from bbsmember
+
+		<where>
+			<if test="find_field == ''"></if><!-- 전체회원수 -->
+			<if test="find_field == 'mem_id'"><!-- 검색조건이 아이디 일때 -->
+				mem_id like #{find_name}
+			</if>
+			<if test="find_field == 'mem_name'"><!-- 검색조건이 회원이름 일때 -->
+				mem_name like #{find_name}
+			</if>
+		</where>
+	</select>
+
+	<!-- 검색전 후 회원목록 -->
+	<select id="am_list" resultType="m">
+		select * from (select rowNum rNum,mem_id,mem_name,
+		mem_phone01,mem_phone02,mem_phone03,mem_state,
+		mem_date from
+		(select * from bbsmember
+		
+		<where>
+			<if test="find_field == ''"></if>
+			<if test="find_field == 'mem_id'">
+				mem_id like #{find_name}
+			</if>
+			<if test="find_field == 'mem_name'">
+				mem_name like #{find_name}
+			</if>
+		</where>
+		
+		order by mem_id asc))
+		where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+		<!-- &gt는 >를 뜻함, &lt;은 <를 의미한다. rowNum컬럼은 레코드 저장시 일련번호값이 저장되고, rNum은 rowNum컬럼의 별칭이름이다. -->		
+	</select>
+
+    <!-- 상세정보와 수정폼 -->
+    <select id="am_info" resultType="m">
+      select * from bbsmember where mem_id=#{mem_id}
+    </select>
+    
+    <!-- 관리자에서 사용자 회원정보 수정 -->
+    <update id="am_edit">
+     update bbsmember set mem_pwd=#{mem_pwd}, mem_name=#{mem_name}, mem_zip=#{mem_zip}, mem_zip2=#{mem_zip2}, mem_addr=#{mem_addr},
+     mem_addr2=#{mem_addr2}, mail_id=#{mail_id}, mail_domain=#{mail_domain}, mem_phone01=#{mem_phone01},mem_phone02=#{mem_phone02},
+     mem_phone03=#{mem_phone03},mem_state=#{mem_state},mem_delcont=#{mem_delcont} where mem_id=#{mem_id}
+    </update>
+    
+    <!-- 관리자에서 사용자 회원 삭제 -->
+    <delete id="am_del">
+     delete from bbsmember where mem_id=#{mem_id}
+    </delete>
+    
+</mapper>
+
+
+
+
+
+
+
+
+
+
